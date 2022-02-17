@@ -1,5 +1,4 @@
 import torch
-import matplotlib.pyplot as plt
 from numpy import zeros
 from numpy import savetxt
 from numpy import arange
@@ -15,11 +14,11 @@ noise_level = 0.5  # Maximum Gaussian noise level (~Variance)
 noise_step = 0.02
 torch.set_printoptions(precision=4)
 
-# * Setup the datasets
+# * Set up the datasets
 # Get the datasets from MNIST
 test_data = datasets.MNIST(
     'data', train=False, download=False, transform=transforms.ToTensor())
-# Setup the DataLoader
+# Set up the DataLoader
 test_loader = DataLoader(
     dataset=test_data, batch_size=1, shuffle=False)
 # samples = numOfTestingData = 10000
@@ -64,7 +63,7 @@ for noise in arange(0, noise_level+noise_step, noise_step):
         image = image.clamp(0., 1.)  # Limit image tensor to [0,1]
         output = model(image)  # Get the output tensor
         res = output.argmax()  # Get the maximum's index
-        if(res == label.item()):
+        if res == label.item():
             right_cnt += 1
     accuracy = right_cnt/samples  # Calculate the accuracy
     index = int(noise/noise_step)

@@ -11,13 +11,13 @@ hidden_layers = 64
 noise = 0.1  # ~Variance
 torch.set_printoptions(precision=4)
 
-# * Setup the datasets
+# * Set up the datasets
 # Get the datasets from 'test' folder
-# Transform from the RGB to Garyscale
+# Transform from the RGB to Grayscale
 data_transform = transforms.Compose([transforms.Grayscale(num_output_channels=1),
                                      transforms.ToTensor()])
 test_data = datasets.ImageFolder('test', transform=data_transform)
-# Setup the DataLoader
+# Set up the DataLoader
 test_loader = DataLoader(
     dataset=test_data, batch_size=1, shuffle=False)
 samples = len(test_loader)  # 10
@@ -74,7 +74,7 @@ for image, label in test_loader:
     mage = image.clamp(0., 1.)  # Limit image tensor to [0,1]
     output = model(image)  # Get the output tensor
     res = output.argmax()  # Get the maximum's index
-    if(res == label.item()):
+    if res == label.item():
         right_cnt += 1
     print(f'recognized as {res}')
 accuracy = right_cnt/10  # Calculate the accuracy

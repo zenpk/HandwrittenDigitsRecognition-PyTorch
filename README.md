@@ -1,5 +1,5 @@
 # HandwrittenDigitsRecognition-PyTorch
-**A basic handwritten digits recognition project based on PyTorch using datasets from MNIST**
+**A basic handwritten-digits recognition project based on PyTorch using datasets from MNIST**
 
 > Data resource: [**MNIST**](http://yann.lecun.com/exdb/mnist/)
 >
@@ -9,7 +9,7 @@
 >
 > - [Episode 1: Training a classification model on MNIST with PyTorch](https://www.youtube.com/watch?v=OMDn66kM9Qc&list=LLTkz85dtpbZf_S4eaIQYrUQ&index=2) (**Author: PyTorch Lightning**) 
 
-Sincerely express my gratitude to the authors above. If this repository infringed anyone's copyright, please let me know and I will delete and apologize at once. Thank you!
+Sincerely express my gratitude to the authors above. If this repository infringed anyone's copyright, please let me know so that I will delete and apologize at once. Thank you!
 
 ## Brief Introduction
 
@@ -19,7 +19,7 @@ You can customize the parameters of the model, such as the number of epochs, nod
 
 ## Python Files Explanation
 
-`check_device.py`: If your device support CUDA, it will print 'cuda', otherwise it will print 'cpu'. You can add CUDA integration to this project to improve the speed. By default this project is based on CPU.
+`check_device.py`: If your device support CUDA, it will print 'cuda', otherwise it will print 'cpu'. You can add CUDA integration to this project to improve the speed. By default, this project is based on CPU.
 
 `check_datasets.py`: Show 25 random images from the datasets. You can change the number if you want.
 

@@ -11,11 +11,11 @@ input_size = 784  # 28*28
 hidden_layers = 64
 torch.set_printoptions(precision=4)
 
-# * Setup the datasets
+# * Set up the datasets
 # Get the datasets from MNIST
 test_data = datasets.MNIST(
     'data', train=False, download=False, transform=transforms.ToTensor())
-# Setup the DataLoader
+# Set up the DataLoader
 test_loader = DataLoader(
     dataset=test_data, batch_size=1, shuffle=False)
 # samples = numOfTestingData = 10000
@@ -55,7 +55,7 @@ for step, (image, label) in enumerate(test_loader):
     output = model(image)  # Get the output tensor
     res = output.argmax()  # Get the maximum's index
     print(f'the number is {label.item()}, recognized as {res}', end=', ')
-    if(res == label.item()):
+    if res == label.item():
         right_cnt += 1
         print('RIGHT', end=', ')
     else:

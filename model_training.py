@@ -15,12 +15,12 @@ input_size = 784  # 28*28
 hidden_layers = 64  # Determine how manny nodes in the hidden network
 torch.set_printoptions(precision=4)
 
-# * Setup the datasets
+# * Set up the datasets
 # Get the datasets from MNIST
 if_download = False
 train_data = datasets.MNIST(
     'data', train=True, download=if_download, transform=transforms.ToTensor())
-# Setup the DataLoader
+# Set up the DataLoader
 train_loader = DataLoader(
     dataset=train_data, batch_size=batch_size, shuffle=True)
 # samples = numOfTrainingData/batch_size = 60000/32 = 1875

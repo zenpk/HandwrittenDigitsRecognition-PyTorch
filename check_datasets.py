@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from torchvision import datasets, transforms  # Training datasets
 from torch.utils.data import DataLoader  # To input data more conveniently
 
-# * Setup the datasets
+# * Set up the datasets
 batch_size = 32
 train_data = datasets.MNIST(
     'data', train=True, download=False, transform=transforms.ToTensor())
