@@ -12,11 +12,11 @@ noise = 0.1  # ~Variance
 torch.set_printoptions(precision=4)
 
 # * Set up the datasets
-# Get the datasets from 'test' folder
+# Get the datasets from "test" folder
 # Transform from the RGB to Grayscale
 data_transform = transforms.Compose([transforms.Grayscale(num_output_channels=1),
                                      transforms.ToTensor()])
-test_data = datasets.ImageFolder('test', transform=data_transform)
+test_data = datasets.ImageFolder("test", transform=data_transform)
 # Set up the DataLoader
 test_loader = DataLoader(
     dataset=test_data, batch_size=1, shuffle=False)
@@ -46,25 +46,25 @@ class Recognizer(nn.Module):
         return model
 
 
-model = torch.load('trained_model.pth')  # Load the trained model
+model = torch.load("trained_model.pth")  # Load the trained model
 right_cnt = 0
 it_loader = iter(test_loader)  # Iterator of the test_loader
 for image, label in test_loader:
-    print(f'Testing the image {label.item()}', end=', ')
+    print(f"Testing the image {label.item()}", end=", ")
     plt_image, plt_label = next(it_loader)  # Next sets
     plt.subplot(1, 2, 1)
-    plt.imshow(plt_image[0][0], cmap='gray')
-    plt.axis('off')
-    plt.title('Original Image')
+    plt.imshow(plt_image[0][0], cmap="gray")
+    plt.axis("off")
+    plt.title("Original Image")
     plt_gauss = (noise**0.5)*torch.randn(28, 28)  # Get Gaussian noise
     plt_gauss = plt_gauss.clamp(-1., 1.)  # Limit Gaussian noise to [-1,1]
     plt_image[0][0] += plt_gauss  # Add Gaussian noise to the image
     plt_image[0][0] = plt_image[0][0].clamp(
         0., 1.)  # Limit image tensor to [0,1]
     plt.subplot(1, 2, 2)
-    plt.imshow(plt_image[0][0], cmap='gray')
-    plt.axis('off')
-    plt.title('Noise Added Image')
+    plt.imshow(plt_image[0][0], cmap="gray")
+    plt.axis("off")
+    plt.title("Noise Added Image")
     plt.show()
     # Reshape to 2D tensor (image[batch_size][input_size])
     image = image.reshape(-1, input_size)
@@ -76,6 +76,6 @@ for image, label in test_loader:
     res = output.argmax()  # Get the maximum's index
     if res == label.item():
         right_cnt += 1
-    print(f'recognized as {res}')
+    print(f"recognized as {res}")
 accuracy = right_cnt/10  # Calculate the accuracy
-print(f'Accuracy: {accuracy:.2f}')
+print(f"Accuracy: {accuracy:.2f}")

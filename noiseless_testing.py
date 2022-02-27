@@ -14,7 +14,7 @@ torch.set_printoptions(precision=4)
 # * Set up the datasets
 # Get the datasets from MNIST
 test_data = datasets.MNIST(
-    'data', train=False, download=False, transform=transforms.ToTensor())
+    "data", train=False, download=False, transform=transforms.ToTensor())
 # Set up the DataLoader
 test_loader = DataLoader(
     dataset=test_data, batch_size=1, shuffle=False)
@@ -45,22 +45,22 @@ class Recognizer(nn.Module):
         return model
 
 
-model = torch.load('trained_model.pth')  # Load the trained model
+model = torch.load("trained_model.pth")  # Load the trained model
 accuracy_rec = zeros(samples)  # Record the accuracy
 right_cnt = 0
 for step, (image, label) in enumerate(test_loader):
-    print(f'Testing the {step+1} image', end=', ')
+    print(f"Testing the {step+1} image", end=", ")
     # Reshape to 2D tensor (image[batch_size][input_size])
     image = image.reshape(-1, input_size)
     output = model(image)  # Get the output tensor
     res = output.argmax()  # Get the maximum's index
-    print(f'the number is {label.item()}, recognized as {res}', end=', ')
+    print(f"the number is {label.item()}, recognized as {res}", end=", ")
     if res == label.item():
         right_cnt += 1
-        print('RIGHT', end=', ')
+        print("RIGHT", end=", ")
     else:
-        print('WRONG', end=', ')
+        print("WRONG", end=", ")
     accuracy = right_cnt/(step+1)  # Calculate the accuracy
     accuracy_rec[step] = accuracy
-    print(f'Accuracy = {accuracy:.2f}')
-savetxt('accuracy_noiseless.csv', accuracy_rec, delimiter=',')
+    print(f"Accuracy = {accuracy:.2f}")
+savetxt("accuracy_noiseless.csv", accuracy_rec, delimiter=",")

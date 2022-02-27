@@ -17,7 +17,7 @@ torch.set_printoptions(precision=4)
 # * Set up the datasets
 # Get the datasets from MNIST
 test_data = datasets.MNIST(
-    'data', train=False, download=False, transform=transforms.ToTensor())
+    "data", train=False, download=False, transform=transforms.ToTensor())
 # Set up the DataLoader
 test_loader = DataLoader(
     dataset=test_data, batch_size=1, shuffle=False)
@@ -48,7 +48,7 @@ class Recognizer(nn.Module):
         return model
 
 
-model = torch.load('trained_model.pth')  # Load the trained model
+model = torch.load("trained_model.pth")  # Load the trained model
 cnt = int(noise_level / noise_step) + 1
 accuracy_rec = zeros(cnt)  # Record the accuracy
 noise_rec = zeros(cnt)  # Record the noise level
@@ -69,6 +69,6 @@ for noise in arange(0, noise_level+noise_step, noise_step):
     index = int(noise/noise_step)
     accuracy_rec[index] = accuracy
     noise_rec[index] = noise
-    print(f'Noise Level = {noise:.2f}, Accuracy = {accuracy:.2f}')
-savetxt('accuracy_noise_added.csv', accuracy_rec, delimiter=',')
-savetxt('noise_level.csv', noise_rec, delimiter=',')
+    print(f"Noise Level = {noise:.2f}, Accuracy = {accuracy:.2f}")
+savetxt("accuracy_noise_added.csv", accuracy_rec, delimiter=",")
+savetxt("noise_level.csv", noise_rec, delimiter=",")
