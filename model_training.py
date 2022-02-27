@@ -17,11 +17,9 @@ torch.set_printoptions(precision=4)
 
 # * Set up the datasets
 # Get the datasets from MNIST
-train_data = datasets.MNIST(
-    "data", train=True, download=False, transform=transforms.ToTensor())
+train_data = datasets.MNIST("data", train=True, download=False, transform=transforms.ToTensor())
 # Set up the DataLoader
-train_loader = DataLoader(
-    dataset=train_data, batch_size=batch_size, shuffle=True)
+train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=True)
 # samples = numOfTrainingData/batch_size = 60000/32 = 1875
 samples = len(train_loader)
 
@@ -32,14 +30,11 @@ samples = len(train_loader)
 class Recognizer(nn.Module):
     def __init__(self, input_size, hidden_layers, num_classes):
         super(Recognizer, self).__init__()
-        self.input = nn.Linear(in_features=input_size,
-                               out_features=hidden_layers)
+        self.input = nn.Linear(in_features=input_size, out_features=hidden_layers)
         self.relu_1 = nn.ReLU()
-        self.hidden = nn.Linear(
-            in_features=hidden_layers, out_features=hidden_layers)
+        self.hidden = nn.Linear(in_features=hidden_layers, out_features=hidden_layers)
         self.relu_2 = nn.ReLU()
-        self.output = nn.Linear(
-            in_features=hidden_layers, out_features=num_classes)
+        self.output = nn.Linear(in_features=hidden_layers, out_features=num_classes)
 
     def forward(self, x):
         model = self.input(x)
@@ -76,8 +71,8 @@ for epoch in range(num_epochs):
         print(f"Epoch {epoch + 1}/{num_epochs}", end=", ")
         print(f"step: {step + 1}/{samples}", end=", ")
         print(f"training loss: {loss.item():.4f}")
-    loss_rec_epoch[epoch] = torch.tensor(
-        loss_list).mean()  # The average loss of the epoch
+    loss_rec_epoch[epoch] = torch.tensor(loss_list).mean()  # The average loss of the epoch
+    print(f"Average loss: {loss_rec_epoch[epoch]:.4f}")
 torch.save(model, "trained_model.pth")  # Save the model
 # Save the loss record (by batch)
 savetxt("loss_rec.csv", loss_rec, delimiter=",")
